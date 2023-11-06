@@ -1,23 +1,21 @@
 import Terminal from 'react-console-emulator'
 import commands from '../components/Commands/commands.js'
 import React from 'react'
-import figlet from 'figlet';
-import getcat from '../utils/cat'
 
 export default function Term() {
     const cmds = commands.commands
     const owrs = commands.overwrites
     const terminal = React.createRef()
-    const [prompt, setPrompt] = React.useState('you@/ashterm:~$ ')
-    const [home, sethome] = React.useState('ashterm')
+    const [prompt, setPrompt] = React.useState('you@/captain:~$ ')
+    const [home, sethome] = React.useState('captain')
     const [dir, setdir] = React.useState({
-        'ashterm': []
+        'captain': []
     })
     return (
         <Terminal
             ref={terminal}
             welcomeMessage={[
-                "Welcome to ashterm!",
+                "Welcome to captain-portfolio!",
                 "---",
                 "This is a terminal style website made with React.",
                 "---",
@@ -34,21 +32,21 @@ export default function Term() {
                         terminal.current.clearStdout()
                     }
                 },
-                cat: {
-                    description: 'Get a random cute cat~',
-                    usage: 'cat',
-                    fn: async () => {
-                        const url = await getcat()
-                        terminal.current.pushToStdout("getting a cute cat for you..\n---\n")
-                        terminal.current.pushToStdout(<img src={url} width="500px" height="380px" alt='cat'></img>)
-                    }
-                },
+                // cat: {
+                //     description: 'Get a random cute cat~',
+                //     usage: 'cat',
+                //     fn: async () => {
+                //         const url = await getcat()
+                //         terminal.current.pushToStdout("getting a cute cat for you..\n---\n")
+                //         terminal.current.pushToStdout(<img src={url} width="500px" height="380px" alt='cat'></img>)
+                //     }
+                // },
                 cd: {
                     description: 'Change directory, not really, lol!',
                     usage: 'cd <directory>',
                     fn: (...args) => {
                         if (args.length===1 && args[0]==='..') {
-                            if (prompt === 'you@/ashterm:~$ ') {
+                            if (prompt === 'you@/captain:~$ ') {
                                 return 'cannot go up'
                             } else {
                                 setPrompt(prompt.substring(0, prompt.lastIndexOf('/'))+":~$ ")
